@@ -127,13 +127,6 @@ export function shouldBehaveCorrectly(): void {
         expect(await SumOfWETHBalances).to.be.eq(this.hre.ethers.utils.parseEther("100"))
         // await expect(function ()).to.emit("Removed", adapter).withArgs(args..)
 
-        console.log(await this.LPToken.balanceOf(this.dan.address))
-        console.log(await this.LPToken.totalSupply())
-
-        console.log(await this.WETH.balanceOf(pairAddress))
-        console.log(await this.TKN.balanceOf(pairAddress))
-        console.log(await this.WETH.balanceOf(this.dan.address))
-        console.log(await this.TKN.balanceOf(this.dan.address))
         //testing removeLiquidity
 
         expect(await this.LPToken.connect(this.dan).approve(this.Adapter.address, this.LPToken.balanceOf(this.dan.address))).to.be.ok
@@ -147,8 +140,6 @@ export function shouldBehaveCorrectly(): void {
             this.dan.address,
             deadline
         )).to.be.ok
-
-        console.log(await this.LPToken.totalSupply())
 
         let oldWETHPairBalance: BigNumber = await this.WETH.balanceOf(pairAddress)
         let liquidity: BigNumber = this.hre.ethers.utils.parseEther("10")
