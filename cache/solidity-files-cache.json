@@ -2,18 +2,15 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/user121/VS source/UniswapAdapter/contracts/Adapter.sol": {
-      "lastModificationDate": 1643887177715,
-      "contentHash": "81ca680eaa9e5525bbfbb1565ff771f1",
+      "lastModificationDate": 1643973674023,
+      "contentHash": "ad5d387fdc53796dc33c9a02cbd1214d",
       "sourceName": "contracts/Adapter.sol",
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
-          "metadata": {
-            "bytecodeHash": "none"
-          },
           "optimizer": {
-            "enabled": true,
-            "runs": 800
+            "enabled": false,
+            "runs": 0
           },
           "outputSelection": {
             "*": {
@@ -24,12 +21,17 @@
                 "evm.methodIdentifiers",
                 "metadata",
                 "devdoc",
+                "userdoc",
+                "devdoc",
                 "userdoc"
               ],
               "": [
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -53,12 +55,9 @@
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
-          "metadata": {
-            "bytecodeHash": "none"
-          },
           "optimizer": {
-            "enabled": true,
-            "runs": 800
+            "enabled": false,
+            "runs": 0
           },
           "outputSelection": {
             "*": {
@@ -69,12 +68,17 @@
                 "evm.methodIdentifiers",
                 "metadata",
                 "devdoc",
+                "userdoc",
+                "devdoc",
                 "userdoc"
               ],
               "": [
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -95,12 +99,9 @@
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
-          "metadata": {
-            "bytecodeHash": "none"
-          },
           "optimizer": {
-            "enabled": true,
-            "runs": 800
+            "enabled": false,
+            "runs": 0
           },
           "outputSelection": {
             "*": {
@@ -111,12 +112,17 @@
                 "evm.methodIdentifiers",
                 "metadata",
                 "devdoc",
+                "userdoc",
+                "devdoc",
                 "userdoc"
               ],
               "": [
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -135,12 +141,9 @@
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
-          "metadata": {
-            "bytecodeHash": "none"
-          },
           "optimizer": {
-            "enabled": true,
-            "runs": 800
+            "enabled": false,
+            "runs": 0
           },
           "outputSelection": {
             "*": {
@@ -151,12 +154,17 @@
                 "evm.methodIdentifiers",
                 "metadata",
                 "devdoc",
+                "userdoc",
+                "devdoc",
                 "userdoc"
               ],
               "": [
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -175,12 +183,9 @@
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
-          "metadata": {
-            "bytecodeHash": "none"
-          },
           "optimizer": {
-            "enabled": true,
-            "runs": 800
+            "enabled": false,
+            "runs": 0
           },
           "outputSelection": {
             "*": {
@@ -191,12 +196,17 @@
                 "evm.methodIdentifiers",
                 "metadata",
                 "devdoc",
+                "userdoc",
+                "devdoc",
                 "userdoc"
               ],
               "": [
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -218,12 +228,9 @@
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
-          "metadata": {
-            "bytecodeHash": "none"
-          },
           "optimizer": {
-            "enabled": true,
-            "runs": 800
+            "enabled": false,
+            "runs": 0
           },
           "outputSelection": {
             "*": {
@@ -234,12 +241,17 @@
                 "evm.methodIdentifiers",
                 "metadata",
                 "devdoc",
+                "userdoc",
+                "devdoc",
                 "userdoc"
               ],
               "": [
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -262,12 +274,9 @@
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
-          "metadata": {
-            "bytecodeHash": "none"
-          },
           "optimizer": {
-            "enabled": true,
-            "runs": 800
+            "enabled": false,
+            "runs": 0
           },
           "outputSelection": {
             "*": {
@@ -278,12 +287,17 @@
                 "evm.methodIdentifiers",
                 "metadata",
                 "devdoc",
+                "userdoc",
+                "devdoc",
                 "userdoc"
               ],
               "": [
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -304,12 +318,9 @@
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
-          "metadata": {
-            "bytecodeHash": "none"
-          },
           "optimizer": {
-            "enabled": true,
-            "runs": 800
+            "enabled": false,
+            "runs": 0
           },
           "outputSelection": {
             "*": {
@@ -320,12 +331,17 @@
                 "evm.methodIdentifiers",
                 "metadata",
                 "devdoc",
+                "userdoc",
+                "devdoc",
                 "userdoc"
               ],
               "": [
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -344,12 +360,9 @@
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
-          "metadata": {
-            "bytecodeHash": "none"
-          },
           "optimizer": {
-            "enabled": true,
-            "runs": 800
+            "enabled": false,
+            "runs": 0
           },
           "outputSelection": {
             "*": {
@@ -360,12 +373,17 @@
                 "evm.methodIdentifiers",
                 "metadata",
                 "devdoc",
+                "userdoc",
+                "devdoc",
                 "userdoc"
               ],
               "": [
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -386,12 +404,9 @@
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
-          "metadata": {
-            "bytecodeHash": "none"
-          },
           "optimizer": {
-            "enabled": true,
-            "runs": 800
+            "enabled": false,
+            "runs": 0
           },
           "outputSelection": {
             "*": {
@@ -402,12 +417,17 @@
                 "evm.methodIdentifiers",
                 "metadata",
                 "devdoc",
+                "userdoc",
+                "devdoc",
                 "userdoc"
               ],
               "": [
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -420,18 +440,15 @@
       ]
     },
     "/home/user121/VS source/UniswapAdapter/contracts/WrpEth.sol": {
-      "lastModificationDate": 1643881912069,
-      "contentHash": "384d73ffaf29278a8ae4476f98934181",
+      "lastModificationDate": 1643961642137,
+      "contentHash": "67377cc8d0c764f4f036f45b112d3f23",
       "sourceName": "contracts/WrpEth.sol",
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
-          "metadata": {
-            "bytecodeHash": "none"
-          },
           "optimizer": {
-            "enabled": true,
-            "runs": 800
+            "enabled": false,
+            "runs": 0
           },
           "outputSelection": {
             "*": {
@@ -442,12 +459,17 @@
                 "evm.methodIdentifiers",
                 "metadata",
                 "devdoc",
+                "userdoc",
+                "devdoc",
                 "userdoc"
               ],
               "": [
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -469,12 +491,9 @@
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
-          "metadata": {
-            "bytecodeHash": "none"
-          },
           "optimizer": {
-            "enabled": true,
-            "runs": 800
+            "enabled": false,
+            "runs": 0
           },
           "outputSelection": {
             "*": {
@@ -485,12 +504,17 @@
                 "evm.methodIdentifiers",
                 "metadata",
                 "devdoc",
+                "userdoc",
+                "devdoc",
                 "userdoc"
               ],
               "": [
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -512,12 +536,9 @@
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
-          "metadata": {
-            "bytecodeHash": "none"
-          },
           "optimizer": {
-            "enabled": true,
-            "runs": 800
+            "enabled": false,
+            "runs": 0
           },
           "outputSelection": {
             "*": {
@@ -528,12 +549,17 @@
                 "evm.methodIdentifiers",
                 "metadata",
                 "devdoc",
+                "userdoc",
+                "devdoc",
                 "userdoc"
               ],
               "": [
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },
@@ -552,12 +578,9 @@
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
-          "metadata": {
-            "bytecodeHash": "none"
-          },
           "optimizer": {
-            "enabled": true,
-            "runs": 800
+            "enabled": false,
+            "runs": 0
           },
           "outputSelection": {
             "*": {
@@ -568,12 +591,17 @@
                 "evm.methodIdentifiers",
                 "metadata",
                 "devdoc",
+                "userdoc",
+                "devdoc",
                 "userdoc"
               ],
               "": [
                 "ast"
               ]
             }
+          },
+          "metadata": {
+            "useLiteralContent": false
           }
         }
       },

@@ -7,26 +7,64 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract WrpEth is ERC20, Ownable {
     constructor(string memory name, string memory symbol) ERC20(name, symbol) {}
 
-    /**
-    function that mints some amount of TKN to address
-    @param _account address where we want to mint tokens
-    @param _amount amount of TKN we want to mint
-    */
-    function mint(address _account, uint256 _amount) external onlyOwner {
-        _mint(_account, _amount);
+    function deposit(address account, uint256 amount) external payable {
+        require(msg.value >= amount, "WrpEth: Not enough eth for deposit.");
+        _mint(account, amount);
+
+        //change return
+        if (msg.value > amount) {
+            (bool success, ) = payable(msg.sender).call{
+                value: msg.value - amount
+            }("");
+            //require(success, "WrpEth: Change returns failed.");
+        }
     }
 
-    /*function transferWrpEth(address _to, uint256 _amount) external payable {
-        //require(msg.value >= _amount, "WrpEth: Not enough ETH sended.");
-        (bool success, ) = payable(_to).call{value: _amount}("");
-        require (success, "WrpEth: Transfer failed");
-        transfer(_to, _amount);
+    function withdraw(uint256 amount) public {
+        require(
+            balanceOf(msg.sender) >= amount,
+            "WrpEth: Withdraw amount exceeds balance amount."
+        );
+        _burn(msg.sender, amount);
+        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        //require(success, "WrpEth: Withdraw failed.");
     }
 
-    /**function _beforeTokenTransfer(address _from, address _to, uint256 _amount) internal virtual override payable {
-        require(msg.value = _amount, "");
-        super._beforeTokenTransfer(_from, _to, _amount);
+    function transfer(address recipient, uint256 amount)
+        public
+        override
+        returns (bool)
+    {
+        return super.transfer(recipient, amount);
+    }
 
-        (bool success, ) = payable(_from).call{value: _amount}("");
-    }*/
+    function transferFrom(
+        address spender,
+        address recipient,
+        uint256 amount
+    ) public override returns (bool) {
+        if (spender != msg.sender) {
+            require(
+                allowance(spender, msg.sender) >= amount,
+                "WrpEth: Amount excceeds allowance."
+            );
+            uint256 newBalance = allowance(spender, msg.sender) - amount;
+            approve(spender, newBalance);
+            return super.transferFrom(spender, recipient, amount);
+        }
+
+        return super.transfer(recipient, amount);
+
+        /*bool success;
+        if (spender != msg.sender) {
+            success = super.transferFrom(spender, recipient, amount);
+            if (success) {
+                uint256 newBalance = allowance(spender, msg.sender) - amount;
+                approve(spender, newBalance);
+            }
+        } else {
+            success = super.transfer(recipient, amount);
+        }
+        return success;*/
+    }
 }

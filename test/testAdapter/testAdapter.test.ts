@@ -36,14 +36,19 @@ describe("Unit tests", function () {
         );
         console.log(`Deployed to: ${this.TKN.address}`)
 
-        /*const WETH = await hre.ethers.getContractFactory("WrpEth");
+        const WETH = await hre.ethers.getContractFactory("WrpEth");
         this.WETH = <WrpEth>await WETH.deploy(
             "Wrapped Ethereum",
             "WETH",
         );
-        console.log(`Deployed to: ${this.WETH.address}`)*/
-        //this.WETH = await this.hre.ethers.getContractAt("WETH9", config.WETH_ADDRESS as string)
-        this.WETHAddress = config.WETH_ADDRESS as string
+        console.log(`Deployed to: ${this.WETH.address}`)
+
+        /*let getPairAbi = "function getPair(address,address)returns(address)"
+        this.factory = await this.hre.ethers.getContractAt(getPairAbi, config.FACTORY_ADDRESS as string)*/
+        //this.WETHAddress = config.WETH_ADDRESS as string
+
+
+        this.LPToken = await this.hre.ethers.getContractAt("IERC20", config.WETH_ADDRESS as string)
 
         const adapter = await hre.ethers.getContractFactory("Adapter");
         this.Adapter = <Adapter>await adapter.deploy(
@@ -53,7 +58,7 @@ describe("Unit tests", function () {
         console.log(`Deployed to: ${this.Adapter.address}`)
     });
 
-    describe("Test Shop", function () {
+    describe("Test adapter", function () {
         beforeEach(async function () {
         });
 

@@ -9,20 +9,20 @@ import "@openzeppelin/contracts/interfaces/IERC20.sol";
 contract Adapter {
     using SafeERC20 for IERC20;
 
-    IUniswapV2Factory public factory;
+    address public factory;
 
-    IUniswapV2Router02 public router;
+    address public router;
 
     constructor(address _factory, address _router) {
-        factory = IUniswapV2Factory(_factory);
-        router = IUniswapV2Router02(_router);
+        factory = _factory;
+        router = _router;
     }
 
     function createPair(address tokenA, address tokenB)
         external
         returns (address pair)
     {
-        pair = factory.createPair(tokenA, tokenB);
+        pair = IUniswapV2Factory(factory).createPair(tokenA, tokenB);
     }
 
     function getPair(address tokenA, address tokenB)
@@ -30,11 +30,11 @@ contract Adapter {
         view
         returns (address pair)
     {
-        pair = factory.getPair(tokenA, tokenB);
+        pair = IUniswapV2Factory(factory).getPair(tokenA, tokenB);
     }
 
     function allPairsLength() external view returns (uint256) {
-        return factory.allPairsLength();
+        return IUniswapV2Factory(factory).allPairsLength();
     }
 
     function addLiquidity(
@@ -54,8 +54,6 @@ contract Adapter {
             uint256 liquidity
         )
     {
-        /*IERC20(tokenA).approve(address(this), amountADesired);
-        IERC20(tokenB).approve(address(this), amountBDesired);*/
         IERC20(tokenA).safeTransferFrom(
             msg.sender,
             address(this),
@@ -68,7 +66,8 @@ contract Adapter {
         );
         IERC20(tokenA).approve(address(router), amountADesired);
         IERC20(tokenB).approve(address(router), amountBDesired);
-        (amountA, amountB, liquidity) = router.addLiquidity(
+
+        (amountA, amountB, liquidity) = IUniswapV2Router02(router).addLiquidity(
             tokenA,
             tokenB,
             amountADesired,
@@ -78,6 +77,7 @@ contract Adapter {
             to,
             deadline
         );
+
         IERC20(tokenA).safeTransfer(msg.sender, amountADesired - amountA);
         IERC20(tokenB).safeTransfer(msg.sender, amountBDesired - amountB);
     }
@@ -91,7 +91,16 @@ contract Adapter {
         address to,
         uint256 deadline
     ) external returns (uint256 amountA, uint256 amountB) {
-        (amountA, amountB) = router.removeLiquidity(
+        address pairAddress = (
+            IUniswapV2Factory(factory).getPair(tokenA, tokenB)
+        );
+        IERC20(pairAddress).safeTransferFrom(
+            msg.sender,
+            address(this),
+            liquidity
+        );
+        IERC20(pairAddress).approve(address(router), liquidity);
+        (amountA, amountB) = IUniswapV2Router02(router).removeLiquidity(
             tokenA,
             tokenB,
             liquidity,
@@ -109,13 +118,18 @@ contract Adapter {
         address to,
         uint256 deadline
     ) external returns (uint256[] memory amounts) {
-        amounts = router.swapExactTokensForTokens(
+        IERC20(path[0]).safeTransferFrom(msg.sender, address(this), amountIn);
+        IERC20(path[0]).approve(address(router), amountIn);
+
+        amounts = IUniswapV2Router02(router).swapExactTokensForTokens(
             amountIn,
             amountOutMin,
             path,
             to,
             deadline
         );
+
+        //IERC20(path[1]).safeTransferFrom(to, msg.sender, 1);
     }
 
     function swapTokensForExactTokens(
@@ -125,13 +139,20 @@ contract Adapter {
         address to,
         uint256 deadline
     ) external returns (uint256[] memory amounts) {
-        amounts = router.swapTokensForExactTokens(
+        IERC20(path[0]).safeTransferFrom(
+            msg.sender,
+            address(this),
+            amountInMax
+        );
+        IERC20(path[0]).approve(address(router), amountInMax);
+        amounts = IUniswapV2Router02(router).swapTokensForExactTokens(
             amountOut,
             amountInMax,
             path,
             to,
             deadline
         );
+        IERC20(path[0]).safeTransfer(msg.sender, amountInMax - amounts[0]);
     }
 
     function getAmountsOut(uint256 amountIn, address[] calldata path)
@@ -139,7 +160,7 @@ contract Adapter {
         view
         returns (uint256[] memory amounts)
     {
-        amounts = router.getAmountsOut(amountIn, path);
+        amounts = IUniswapV2Router02(router).getAmountsOut(amountIn, path);
     }
 
     function getAmountsIn(uint256 amountOut, address[] calldata path)
@@ -147,6 +168,6 @@ contract Adapter {
         view
         returns (uint256[] memory amounts)
     {
-        amounts = router.getAmountsIn(amountOut, path);
+        amounts = IUniswapV2Router02(router).getAmountsIn(amountOut, path);
     }
 }
