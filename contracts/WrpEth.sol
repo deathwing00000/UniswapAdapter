@@ -13,18 +13,16 @@ contract WrpEth is ERC20, Ownable {
 
         //change return
         if (msg.value > amount) {
-            (bool success, ) = payable(msg.sender).call{
-                value: msg.value - amount
-            }("");
+            payable(msg.sender).call{value: msg.value - amount}("");
             //require(success, "WrpEth: Change returns failed.");
         }
     }
 
     function withdraw(uint256 amount) public {
-        require(
+        /*require(
             balanceOf(msg.sender) >= amount,
             "WrpEth: Withdraw amount exceeds balance amount."
-        );
+        );*/
         _burn(msg.sender, amount);
         (bool success, ) = payable(msg.sender).call{value: amount}("");
         //require(success, "WrpEth: Withdraw failed.");
