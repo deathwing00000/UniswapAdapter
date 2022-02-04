@@ -13,7 +13,7 @@ import {
   Signer,
   utils,
 } from "ethers";
-import { FunctionFragment, Result } from "@ethersproject/abi";
+import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
@@ -121,8 +121,47 @@ export interface AdapterInterface extends utils.Interface {
     data: BytesLike
   ): Result;
 
-  events: {};
+  events: {
+    "LiquidityAdded(address,uint256,uint256,uint256)": EventFragment;
+    "LiquidityRemoved(address,uint256,uint256,uint256)": EventFragment;
+    "PairCreated(address,address,address)": EventFragment;
+    "Swapped(address,uint256[])": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "LiquidityAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "LiquidityRemoved"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "PairCreated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Swapped"): EventFragment;
 }
+
+export type LiquidityAddedEvent = TypedEvent<
+  [string, BigNumber, BigNumber, BigNumber],
+  { to: string; amountA: BigNumber; amountB: BigNumber; liquidity: BigNumber }
+>;
+
+export type LiquidityAddedEventFilter = TypedEventFilter<LiquidityAddedEvent>;
+
+export type LiquidityRemovedEvent = TypedEvent<
+  [string, BigNumber, BigNumber, BigNumber],
+  { to: string; amountA: BigNumber; amountB: BigNumber; liquidity: BigNumber }
+>;
+
+export type LiquidityRemovedEventFilter =
+  TypedEventFilter<LiquidityRemovedEvent>;
+
+export type PairCreatedEvent = TypedEvent<
+  [string, string, string],
+  { pairAddress: string; tokenA: string; tokennB: string }
+>;
+
+export type PairCreatedEventFilter = TypedEventFilter<PairCreatedEvent>;
+
+export type SwappedEvent = TypedEvent<
+  [string, BigNumber[]],
+  { to: string; amounts: BigNumber[] }
+>;
+
+export type SwappedEventFilter = TypedEventFilter<SwappedEvent>;
 
 export interface Adapter extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -375,7 +414,53 @@ export interface Adapter extends BaseContract {
     ): Promise<BigNumber[]>;
   };
 
-  filters: {};
+  filters: {
+    "LiquidityAdded(address,uint256,uint256,uint256)"(
+      to?: string | null,
+      amountA?: null,
+      amountB?: null,
+      liquidity?: BigNumberish | null
+    ): LiquidityAddedEventFilter;
+    LiquidityAdded(
+      to?: string | null,
+      amountA?: null,
+      amountB?: null,
+      liquidity?: BigNumberish | null
+    ): LiquidityAddedEventFilter;
+
+    "LiquidityRemoved(address,uint256,uint256,uint256)"(
+      to?: string | null,
+      amountA?: null,
+      amountB?: null,
+      liquidity?: BigNumberish | null
+    ): LiquidityRemovedEventFilter;
+    LiquidityRemoved(
+      to?: string | null,
+      amountA?: null,
+      amountB?: null,
+      liquidity?: BigNumberish | null
+    ): LiquidityRemovedEventFilter;
+
+    "PairCreated(address,address,address)"(
+      pairAddress?: string | null,
+      tokenA?: null,
+      tokennB?: null
+    ): PairCreatedEventFilter;
+    PairCreated(
+      pairAddress?: string | null,
+      tokenA?: null,
+      tokennB?: null
+    ): PairCreatedEventFilter;
+
+    "Swapped(address,uint256[])"(
+      to?: string | null,
+      amounts?: BigNumberish[] | null
+    ): SwappedEventFilter;
+    Swapped(
+      to?: string | null,
+      amounts?: BigNumberish[] | null
+    ): SwappedEventFilter;
+  };
 
   estimateGas: {
     addLiquidity(

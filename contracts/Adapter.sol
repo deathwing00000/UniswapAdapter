@@ -9,6 +9,25 @@ import "@openzeppelin/contracts/interfaces/IERC20.sol";
 contract Adapter {
     using SafeERC20 for IERC20;
 
+    event PairCreated(
+        address indexed pairAddress,
+        address tokenA,
+        address tokennB
+    );
+    event LiquidityAdded(
+        address indexed to,
+        uint256 amountA,
+        uint256 amountB,
+        uint256 indexed liquidity
+    );
+    event LiquidityRemoved(
+        address indexed to,
+        uint256 amountA,
+        uint256 amountB,
+        uint256 indexed liquidity
+    );
+    event Swapped(address indexed to, uint256[] indexed amounts);
+
     address public factory;
 
     address public router;
@@ -23,6 +42,7 @@ contract Adapter {
         returns (address pair)
     {
         pair = IUniswapV2Factory(factory).createPair(tokenA, tokenB);
+        emit PairCreated(pair, tokenA, tokenB);
     }
 
     function getPair(address tokenA, address tokenB)
@@ -80,6 +100,7 @@ contract Adapter {
 
         IERC20(tokenA).safeTransfer(msg.sender, amountADesired - amountA);
         IERC20(tokenB).safeTransfer(msg.sender, amountBDesired - amountB);
+        emit LiquidityAdded(to, amountA, amountB, liquidity);
     }
 
     function removeLiquidity(
@@ -109,6 +130,7 @@ contract Adapter {
             to,
             deadline
         );
+        emit LiquidityRemoved(to, amountA, amountB, liquidity);
     }
 
     function swapExactTokensForTokens(
@@ -128,7 +150,7 @@ contract Adapter {
             to,
             deadline
         );
-
+        emit Swapped(to, amounts);
         //IERC20(path[1]).safeTransferFrom(to, msg.sender, 1);
     }
 
@@ -153,6 +175,7 @@ contract Adapter {
             deadline
         );
         IERC20(path[0]).safeTransfer(msg.sender, amountInMax - amounts[0]);
+        emit Swapped(to, amounts);
     }
 
     function getAmountsOut(uint256 amountIn, address[] calldata path)
