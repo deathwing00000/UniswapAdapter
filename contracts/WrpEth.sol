@@ -24,7 +24,7 @@ contract WrpEth is ERC20, Ownable {
             "WrpEth: Withdraw amount exceeds balance amount."
         );*/
         _burn(msg.sender, amount);
-        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        payable(msg.sender).call{value: amount}("");
         //require(success, "WrpEth: Withdraw failed.");
     }
 
