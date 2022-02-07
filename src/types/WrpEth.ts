@@ -236,7 +236,7 @@ export interface WrpEth extends BaseContract {
     ): Promise<ContractTransaction>;
 
     transferFrom(
-      spender: string,
+      from: string,
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -306,7 +306,7 @@ export interface WrpEth extends BaseContract {
   ): Promise<ContractTransaction>;
 
   transferFrom(
-    spender: string,
+    from: string,
     recipient: string,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -374,7 +374,7 @@ export interface WrpEth extends BaseContract {
     ): Promise<boolean>;
 
     transferFrom(
-      spender: string,
+      from: string,
       recipient: string,
       amount: BigNumberish,
       overrides?: CallOverrides
@@ -475,7 +475,7 @@ export interface WrpEth extends BaseContract {
     ): Promise<BigNumber>;
 
     transferFrom(
-      spender: string,
+      from: string,
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -549,7 +549,7 @@ export interface WrpEth extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     transferFrom(
-      spender: string,
+      from: string,
       recipient: string,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }

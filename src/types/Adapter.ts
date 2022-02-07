@@ -125,7 +125,7 @@ export interface AdapterInterface extends utils.Interface {
     "LiquidityAdded(address,uint256,uint256,uint256)": EventFragment;
     "LiquidityRemoved(address,uint256,uint256,uint256)": EventFragment;
     "PairCreated(address,address,address)": EventFragment;
-    "Swapped(address,uint256[])": EventFragment;
+    "Swapped(address,uint256[],address[])": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "LiquidityAdded"): EventFragment;
@@ -151,14 +151,14 @@ export type LiquidityRemovedEventFilter =
 
 export type PairCreatedEvent = TypedEvent<
   [string, string, string],
-  { pairAddress: string; tokenA: string; tokennB: string }
+  { pairAddress: string; tokenA: string; tokenB: string }
 >;
 
 export type PairCreatedEventFilter = TypedEventFilter<PairCreatedEvent>;
 
 export type SwappedEvent = TypedEvent<
-  [string, BigNumber[]],
-  { to: string; amounts: BigNumber[] }
+  [string, BigNumber[], string[]],
+  { to: string; amounts: BigNumber[]; path: string[] }
 >;
 
 export type SwappedEventFilter = TypedEventFilter<SwappedEvent>;
@@ -444,21 +444,23 @@ export interface Adapter extends BaseContract {
     "PairCreated(address,address,address)"(
       pairAddress?: string | null,
       tokenA?: null,
-      tokennB?: null
+      tokenB?: null
     ): PairCreatedEventFilter;
     PairCreated(
       pairAddress?: string | null,
       tokenA?: null,
-      tokennB?: null
+      tokenB?: null
     ): PairCreatedEventFilter;
 
-    "Swapped(address,uint256[])"(
+    "Swapped(address,uint256[],address[])"(
       to?: string | null,
-      amounts?: BigNumberish[] | null
+      amounts?: BigNumberish[] | null,
+      path?: null
     ): SwappedEventFilter;
     Swapped(
       to?: string | null,
-      amounts?: BigNumberish[] | null
+      amounts?: BigNumberish[] | null,
+      path?: null
     ): SwappedEventFilter;
   };
 
