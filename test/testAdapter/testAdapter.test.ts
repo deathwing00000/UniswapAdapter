@@ -7,6 +7,7 @@ import fs from "fs";
 import type { Adapter } from "../../src/types/Adapter";
 import type { TestTKN } from "../../src/types/TestTKN";
 import type { WrpEth } from "../../src/types/WrpEth";
+import type { Receiver } from "../../src/types/Receiver";
 import { Signers } from "../types";
 
 import { shouldDeployCorrectly } from "./testAdapter.deployment";
@@ -59,6 +60,15 @@ describe("Unit tests", function () {
             )
         );
         console.log(`Deployed to: ${this.Adapter.address}`);
+
+
+        const receiver = await hre.ethers.getContractFactory("Receiver")
+        this.shitReceiver = <Receiver>(
+            await receiver.deploy(
+                this.WETH.address
+            )
+        )
+        console.log(`Deployed to: ${this.shitReceiver.address}`);
     });
 
     describe("Test adapter", function () {
